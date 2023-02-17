@@ -7,20 +7,43 @@ def comptage_lettre(text):
         liste.append((elem, text.count(elem)))
     return sorted(liste, key=lambda x : x[1])
 
-class ArbreB:
-    def __init__(self, arbre):
-        self.arbre = arbre
+class ArbreB(object):
+    def __init__(self, racine, nb_sommet):
+        self.racine = racine
+        self.nb_sommet = nb_sommet
+
+    def insertion_sommet(self):
+        pass
+
+    def suppression_sommet(self):
+        pass
+
+    def recherche_sommet(self):
+        pass
+
+    def fusion_arbre(self):
+        pass
 
 class Sommet(ArbreB):
 
-    def __init__(self, arbre, parent, fd, fg, valeur, nom):
-        self.parent = parent
-        self.fd = fd
-        self.fg = fg
+    def __init__(self, valeur, nom, racine="self", nb_sommet=1):
+        super().__init__(racine, nb_sommet)
         self.valeur = valeur
         self.nom = nom
-        super().__init__(arbre)
 
     def affichage(self):
-        print(self.parent, self.fd, self.fg, self.valeur, self.nom)
+        print(self.valeur, self.nom)
 
+    def rename_sommet(self, new_name):
+        self.nom = new_name
+
+test = comptage_lettre("bonjour comment ca va ?")
+print(test)
+l = []
+for elem in test:
+    l.append(Sommet(elem[1], elem[0]))
+for i in range(len(l)):
+    l[i].affichage()
+
+#l[-1].rename_sommet("test")
+#l[-1].affichage()
