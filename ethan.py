@@ -11,18 +11,11 @@ class ArbreB(object):
     def __init__(self, racine=None):
         self.racine = racine
 
-    def recherche(self, nom):
+    def recherche_sommet(self, nom):
         """Prend un ArbreB en entré ainsi qu'un nom de Sommet à rechercher dans l'arbre
         et renvois le Sommet correspondant ou None sinon"""
-        def recherche_sommet(self, nom):
-            if type(self) == ArbreB:
-                self = self.racine
-            if self.nom == nom:
-                return self
-            elif self.fils_gauche != None and self.fils_droit != None:
-                return recherche_sommet(self.fils_gauche, nom) or recherche_sommet(self.fils_droit, nom)
-        return recherche_sommet(self, nom)
-        
+        if type(self) == ArbreB:
+            return self.racine.recherche_sommet(nom)
 
     def fusion_arbre(self, sommet1, sommet2):
         """Prend deux Sommet en entré et renvois un nouveau Sommet qui est le père des deux Sommets
@@ -45,57 +38,81 @@ class ArbreB(object):
             liste_sommet = sorted(liste_sommet, key=lambda x : x.valeur)
         return ArbreB(liste_sommet[0])
     
-    def codage_arbre(self):
-        """Prend un ArbreB en entré et renvois le code de Huffman
-        de cet arbre sous forme de dictionnaire {nom_de_la_lettre : code_de_la_lettre}"""
-        dico = {}
-        def codage(self, code_sommet=""):
-            if type(self) == ArbreB:
-                self = self.racine
-            if self.fils_gauche != None:
-                codage(self.fils_gauche, code_sommet+"0")
-            if self.fils_droit != None:
-                codage(self.fils_droit, code_sommet+"1")
-            if len(self.nom) == 1:
-                dico[self.nom] = code_sommet
-            return dico
-        codage(self)
-        return dico
-    
-class Sommet(object):
+    def codage(self, code_sommet="", dico={}):
+        if type(self) == ArbreB:
+            return self.racine.codage(code_sommet, dico)
+        
+    def insertion_sommet(self, valeur, nom, liste_sommet):
+        liste_sommet.append(Sommet(valeur, nom))
+        return ArbreB.create_tree(liste_sommet)
 
+    def suppression_sommet(self, nom, liste_sommet):
+        liste_sommet.remove(self.recherche_sommet(nom))
+        return ArbreB.create_tree(liste_sommet)
+    
+
+class Sommet(ArbreB):
     def __init__(self, valeur, nom, fils_gauche=None, fils_droit=None):
         self.valeur = valeur
         self.nom = nom
-        self.fils_droit = fils_droit
         self.fils_gauche = fils_gauche
+        self.fils_droit = fils_droit
 
-    def affichage(self):
-        return self.valeur, self.nom, self.fils_droit, self.fils_gauche
+    def getValeur(self):
+        return self.valeur
+    def setValeur(self, newValeur):
+        self.valeur = newValeur
+    def getNom(self):
+        return self.nom
+    def setNom(self, newNom):
+        self.nom = newNom
+    def getGauche(self):
+        return self.fils_gauche
+    def setGauche(self, newGauche):
+        self.fils_gauche = newGauche
+    def getDroit(self):
+        return self.fils_droit
+    def setGauche(self, newDroit):
+        self.fils_droit = newDroit
 
-    def rename_sommet(self, new_name):
-        self.nom = new_name
-
-    def insertion_sommet(self, valeur, nom, liste_sommet):
-        liste_sommet.append(Sommet(valeur, nom))
-        return liste_sommet
+    def __str__(self):
+        return f"{self.valeur, self.nom, self.fils_gauche, self.fils_droit}"
     
-    def suppression_sommet(self, liste_sommet):
-        liste_sommet.remove(self)
-        return liste_sommet
         
-    def make_list(liste_occurence):
+    def make_list(liste_occurence : list):
         """Prend en entré une liste de tuple (lettre, occurence) et renvois une liste contenant les Sommets de ces tuples"""
         liste_sommet = []
         for nom, valeur in liste_occurence:
             liste_sommet.append(Sommet(valeur, nom))
         return liste_sommet
 
+    def make_list2(dict_occurence : dict):
+        """Prend en entré un dictionnaire (lettre, occurence) et renvois une liste contenant les Sommets de ces tuples"""
+        liste_sommet = []
+        for nom, valeur in dict_occurence.items():
+            liste_sommet.append(Sommet(valeur, nom))
+        return liste_sommet
+
+    def codage(self, code_sommet="", dico={}):
+        if self.fils_gauche != None:
+            self.fils_gauche.codage(code_sommet+"0", dico)
+        if self.fils_droit != None:
+            self.fils_droit.codage(code_sommet+"1", dico)
+        if len(self.nom) == 1:
+            dico[self.nom] = code_sommet
+        return dico
+    
+    def recherche_sommet(self, nom):
+            if self.nom == nom:
+                return self
+            elif self.fils_gauche != None and self.fils_droit != None:
+                return self.fils_gauche.recherche_sommet(nom) or self.fils_droit.recherche_sommet(nom)
 
 
 
 test = comptage_lettre("bonjour")
 #print(test)
+#test = {"o" : 2, "b" : 1, "j" : 1, "u" : 1}
 l = Sommet.make_list(test)
 #print(l)
 
@@ -106,4 +123,6 @@ a = ArbreB.create_tree(l)
 #print(a.racine.fils_gauche.affichage(), a.racine.fils_droit.affichage())
 #print(a.racine.fils_gauche.fils_gauche.affichage(), a.racine.fils_gauche.fils_droit.fils_gauche.affichage(), a.racine.fils_gauche.fils_droit.fils_droit.affichage(), a.racine.fils_droit.fils_droit.affichage())
 
-print(test)
+#print(test)
+#a = a.suppression_sommet("o", l)
+#print(a.codage())
