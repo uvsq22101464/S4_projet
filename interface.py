@@ -50,7 +50,10 @@ def decrypte_texte(dico, text: str):
     #    for key, val in dico.items():
     #        if val == carac:
     #            result += key
-    return result
+    if detect(result) == detect(boite_texte.get()):
+        return result
+    else:
+        return f"ce n'est pas la bonne clé"
 
 
 def getDictText(text):
@@ -93,20 +96,23 @@ def language(langue):  # a changer
     Elle permet de changer la langue selon la langue choisie par l'utilisateur.
     """
     if langue == "Francais":
-        titre1.config(text="Entrez un texte pour obtenir un codage")
-        bouton_texte.config(text="Générer le code")
+        titre1.config(text="enter du text pour obtenir un codage")
+        titre2.config(text ="décryptage : ")
+        titre3.config(text ="cryptage : ")
+        bouton_texte.config(text="générer un codage")
         bouton_decrypte.config(text="décrypter")
         bouton_decode.config(text="crypter")
-        bouton_open_file_a_crypter.config(text="ouvrir un fichier à crypter")
-        bouton_open_file_a_decrypter.config(text="ouvrir fichier à decrypter")
-        bouton_save_decrypter.config("sauvegarder le decryptage")
-        bouton_save_crypter.config(text="sauvegarder le cryptage")
-        bouton_save_cle.config(text="save encryption key")
-        bouton_open_file_obtenir_code.config(
-            text="ouvrir un fichier pour obtenir un codage")
+        bouton_open_file_a_crypter.config(text="ouvrir un fichier pour crypter")
+        bouton_open_file_a_decrypter.config(text="ouvrir un fichier pour décrypter")
+        bouton_save_crypter.config(text="sauvegarder cryptage")
+        bouton_save_decrypter.config(text="sauvegarder décryptage")
+        bouton_save_cle.config(text="ssauvegarder la clé dy cryptage")
+        bouton_open_file_obtenir_code.config(text="ouvrir un fichier pour obtenir un codage")
 
     elif langue == "English":
         titre1.config(text="Enter text to get coding")
+        titre2.config(text ="decryption : ")
+        titre3.config(text ="encryption : ")
         bouton_texte.config(text="Generate the code")
         bouton_decrypte.config(text="Unencrypte")
         bouton_decode.config(text="encrypt")
@@ -116,20 +122,51 @@ def language(langue):  # a changer
         bouton_save_decrypter.config(text="save decryption")
         bouton_save_cle.config(text="save key of encrypt")
         bouton_open_file_obtenir_code.config(text="open file to get coding")
+        
 
     elif langue == "Español":
         titre1.config(text="Ingrese el texto para obtener la codificación")
+        titre2.config(text ="cifrado : ")
+        titre3.config(text ="descifrado : ")
         bouton_texte.config(text="Generar el código")
-        bouton_decrypte.config(text="descifrar")
+        bouton_decrypte.config(text="Descifrar")
         bouton_decode.config(text="encriptar")
         bouton_open_file_a_crypter.config(text="abrir un archivo para cifrar")
-        bouton_open_file_a_decrypter.config(
-            text="abrir archivo para descifrar")
+        bouton_open_file_a_decrypter.config(text="abrir archivo para descifrar")
         bouton_save_crypter.config(text="guardar cifrado")
-        bouton_save_decrypter.config("guardar descifrado")
+        bouton_save_decrypter.config(text="guardar descifrado")
         bouton_save_cle.config(text="guardar clave de cifrado")
-        bouton_open_file_obtenir_code.config(
-            text="abrir archivo para obtener codificación")
+        bouton_open_file_obtenir_code.config(text="abrir archivo para obtener codificación")
+        
+    elif langue == "Deutsch":
+        titre1.config(text="Öffnen Sie die Datei, um die Codierung zu erhalten")
+        titre2.config(text ="Entschlüsselung : ")
+        titre3.config(text ="Verschlüsselung : ")
+        bouton_texte.config(text="Generieren Sie den Code")
+        bouton_decrypte.config(text="Entschlüsseln")
+        bouton_decode.config(text="Verschlüsseln")
+        bouton_open_file_a_crypter.config(text="Öffnen Sie eine zu verschlüsselnde Datei")
+        bouton_open_file_a_decrypter.config(text="Datei zum Entschlüsseln öffnen")
+        bouton_save_crypter.config(text="Verschlüsselung speichern")
+        bouton_save_decrypter.config(text="Entschlüsselung speichern")
+        bouton_save_cle.config(text="Schlüssel zum Verschlüsseln speichern")
+        bouton_open_file_obtenir_code.config(text="Öffnen Sie die Datei, um die Codierung zu erhalten")
+        
+    elif langue == "中国人":
+        titre1.config(text="输入文字获取编码")
+        titre2.config(text ="解密 : ")
+        titre3.config(text ="加密 : ")
+        bouton_texte.config(text="生成代码")
+        bouton_decrypte.config(text="解密")
+        bouton_decode.config(text="加密")
+        bouton_open_file_a_crypter.config(text="打开要加密的文件")
+        bouton_open_file_a_decrypter.config(text="打开文件解密")
+        bouton_save_crypter.config(text="保存加密")
+        bouton_save_decrypter.config(text="保存解密")
+        bouton_save_cle.config(text="保存加密密钥")
+        bouton_open_file_obtenir_code.config(text="打开文件进行编码")
+        
+        
 
 
 def afficher_dico():
@@ -215,7 +252,7 @@ text_a_decoder = tk.StringVar()
 
 option = tk.Menubutton(root, text="Choix Langues", relief="raised")
 option.menu = tk.Menu(option)
-liste_option = ["Francais", "English", "Español"]
+liste_option = ["Francais", "English", "Español","Deutsch","中国人"]
 for options in liste_option:
     option.menu.add_command(
         label=options, command=lambda options=options: language(options))
@@ -241,7 +278,7 @@ bouton_afficher.grid(row=3, column=1)
 crypter = tk.Label(root, text="", wraplength=300, anchor="e")
 crypter.grid(row=3, column=0, columnspan=3)
 
-titre3 = tk.Label(root, text="CRYPTAGE :")
+titre3 = tk.Label(root, text="cryptage : ")
 titre3.grid(row=4, column=0, sticky="w")
 bouton_open_file_a_crypter = tk.Button(root, text="ouvrir un fichier à crypter", command=lambda: result_codage.config(
     text=code_texte(getDictText(text.get()), open_file())), width=30)
@@ -255,7 +292,7 @@ result_codage = tk.Label(root, text="")
 result_codage.grid(row=7, column=0)
 
 
-titre2 = tk.Label(root, text="DECRYPTAGE :")
+titre2 = tk.Label(root, text="décryptage : ")
 titre2.grid(row=8, column=0, sticky="w")
 bouton_open_file_a_decrypter = tk.Button(root, text="ouvrir un fichier à decrypter", command=lambda: decrypter.config(
     text=decrypte_texte(getDictText(text.get()), open_file()), width=30))
