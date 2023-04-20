@@ -60,11 +60,14 @@ ethan fait cette partie :)
 
 ### Interface (interface.py):
 
- #### la fonction "comptage lettre"
+ #### La fonction comptage lettre :
  
  * prend une chaîne de caractère en entrée et renvoi une liste de tuple contenant les lettres qui apparaissent dans le  text et leur nombre d'occurence.
- * * on créer un ensemble  avec le text (set(text)) puis on itère dand cete ensemble chaque element un par un on ajoute chaque element à un dictionnaire ainsi que sa fréquence dans le text.
+ *  on créer un ensemble  avec le text (set(text)) puis on itère dand cete ensemble chaque element un par un on ajoute chaque element à un dictionnaire ainsi que sa fréquence dans le text.
  
-
-
+ #### La fonction getDictText :
+ * Donne le dictionnaire du code associé au texte
+ 
+ #### La fonction code_texte :
+ * La fonction prend en argument un dictionnaire et un texte saisi par l'utilisateur. La fonction renvoie un texte crypté selon le dictionnaire si la langue des deux textes est la même sinon elle renvoie un message 'ce n'est pas la meme langue'.
 
