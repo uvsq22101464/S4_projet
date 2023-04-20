@@ -17,7 +17,7 @@ Le but du projet est de coder un texte selon le codage de Hauffman. Puis de cryp
 En haut à gauche un menu déroulant "choix langues" qui permet de choisir la langue. Saississez la langue de votre choix.
 (francais, anglais, allemand, espagnol, chinnois)
 
-![Capture d'écran de mon application](Screenshot%2023-04-20%at%17.26.41.png)
+![Capture d'écran de mon application](Screenshot%202023-04-20%at%17.26.41.png)
 
 
 Pour obtenir un codage :
