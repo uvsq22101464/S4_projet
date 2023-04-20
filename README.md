@@ -58,6 +58,12 @@ Création de deux classes Sommet et Arbre.
 
 ethan fait cette partie :)
 
+#### class sommet :
+ * ...
+
+#### class arbre : 
+ * ...
+
 ## Interface (interface.py):
 
  #### La fonction comptage lettre :
