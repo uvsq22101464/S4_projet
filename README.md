@@ -28,7 +28,7 @@ Pour obtenir un codage :
 Pour crypter un text : 
 - soit vous entrer du text dans la boite de texte et appuyer sur le bouton "crypter"
 - soit vous cliquer sur le button "ouvrir un fichier à crypter"
-![Capture d'écran de mon application](Screenshot%202023-04-20%20at%2017.49.18.png)
+![Capture d'écran de mon application](Screenshot%202023-04-20%at%17.49.29.png)
 
 
 ATTENTION !!
