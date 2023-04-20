@@ -8,6 +8,8 @@
 
 Le but du projet est de coder un texte selon le codage de Hauffman. Puis de crypter un text selon le codage obtenu et ensuite de de pourvoir le décrypter.
 
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+
 
 # Guide d'utilisation de l'application :
 
