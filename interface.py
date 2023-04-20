@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import filedialog
 from langdetect import detect
-from ethan import *
+from module_arbre import *
 import math
 
 root = tk.Tk()
