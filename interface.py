@@ -2,34 +2,38 @@ import tkinter as tk
 from tkinter import filedialog
 from langdetect import detect
 from ethan import *
-from fcts import *
 import math
-
 
 root = tk.Tk()
 root.title("Projet crypto")
 LONGUEUR, LARGEUR = 1200, 400
 
-
 # fonctions :
 def comptage_lettre(text):
-    """prend une chaîne de caractère en entrée et renvoi
-    une liste de tuplecontenant les lettres qui apparaissent
-    dans le text et leur nombre d'occurence"""
+    """
+    Prends une chaîne de caractères en entrée et renvoi
+    une liste de tuple contenant les lettres qui apparaissent
+    dans le texte et leur nombre d'occurrences.
+    """
     liste = []
     for elem in set(text):
         liste.append((elem, text.count(elem)))
     return sorted(liste, key=lambda x : x[1])
 
-def getDictText(text):
-    """Donne le dictionnaire du code associé au texte"""
-    return ArbreB.codage(ArbreB.create_tree(Sommet.make_list(comptage_lettre(text))))
 
-def code_texte(dico: dict, text):
+def getDictText(arbre):
+    """
+    Prends en entrée un ArbreB
+    Donne le dictionnaire associé à l'arbre.
+    """
+    return ArbreB.codage(arbre)
+
+
+def code_texte(dico, text):
     """ 
     La fonction prend en argument un dictionnaire et un texte saisi par l'utilisateur.
     La fonction renvoie un texte crypté selon le dictionnaire si la langue des deux textes
-    est la même sinon elle renvoie un message 'ce n'est pas la meme langue'.
+    est la même sinon elle renvoie un message "ce n'est pas la même langue".
     """
     result = ""
     if verfi_lang() == True:
@@ -40,13 +44,13 @@ def code_texte(dico: dict, text):
                 return f"{carac} {erreur_carac}"
         return result
     else:
-        return f"ce n'est pas la mmême langue"
+        return f"{pas_meme_langue}"
 
 
 def decrypte_texte(dico, text: str):
     """ 
-    La focntion prend en argument un dicctionnaire et un text saisie par l'utilisateur.
-    La focntion renvoie un text decrypter selon le dictionnaire.
+    La fonction prend en argument un dictionnaire et un texte saisi par l'utilisateur.
+    La fonction renvoie un texte décrypter selon le dictionnaire.
     """
     result = ""
     tmp = ""
@@ -58,21 +62,20 @@ def decrypte_texte(dico, text: str):
             if val == tmp:
                 result += key
                 tmp = ""
-    if detect(result) == detect(boite_texte.get()):
+    if detect(result) == detect(texte_codant):
         return result
     else:
-        return f"ce n'est pas la bonne clé"
+        return f"{pas_bonne_cle}"
 
 
 def dessin(canvas: tk.Canvas, arbre: ArbreB):
     """
-    Prend en argument un canvas et un ArbreB
-    La fonction permet de dessiner l'abre sur le canvas
+    Prends en argument un canvas et un ArbreB
+    La fonction permet de dessiner l'arbre sur le canvas.
     """
-    profondeur = ArbreB.profondeur_arbre(ArbreB.create_tree(Sommet.make_list(comptage_lettre(text.get())))) + 1
+    profondeur = ArbreB.profondeur_arbre(arbre) + 1
     largeur = ArbreB.largeur_arbre(arbre)    
     nb_noeud = (arbre.nb_noeud()-1)
-    print(max(largeur[0], largeur[2]), profondeur, nb_noeud)
     coef = nb_noeud + (largeur[0] * profondeur / nb_noeud) if largeur[0] ** math.log2(profondeur) <= 90 else nb_noeud*1.5 / (largeur[0] * profondeur)
     posXSuivant = (largeur[0] ** math.log2(profondeur)) * coef
     try:
@@ -87,75 +90,81 @@ def dessin(canvas: tk.Canvas, arbre: ArbreB):
 def effacer_canvas(canvas: tk.Canvas):
     """
     La fonction prend en argument un canvas.
-    Elle permet d'effacer les éléments dans le canvas
+    Elle permet d'effacer les éléments dans le canvas.
     """
     canvas.delete("all")
 
 
-def language(langue):  # a changer
+def language(langue):
     """
     La fonction prend en argument la langue
-    Elle permet de changer la langue selon la langue choisie par l'utilisateur.
+    Elle permet de changer la langue de la fenêtre selon la langue choisie par l'utilisateur.
     """
-    global erreur_carac, desaf_code, af_code
-    if langue == "Francais":
-        titre1.config(text="entrer du text pour obtenir un codage")
-        titre2.config(text ="décryptage : ")
-        titre3.config(text ="cryptage : ")
-        bouton_texte.config(text="générer un codage")
-        bouton_decrypte.config(text="décrypter")
-        bouton_decode.config(text="crypter")
-        bouton_open_file_a_crypter.config(text="ouvrir un fichier pour crypter")
-        bouton_open_file_a_decrypter.config(text="ouvrir un fichier pour décrypter")
-        bouton_save_crypter.config(text="sauvegarder cryptage")
-        bouton_save_decrypter.config(text="sauvegarder décryptage")
-        bouton_save_cle.config(text="sauvegarder la clé du cryptage")
-        bouton_open_file_obtenir_code.config(text="ouvrir un fichier pour obtenir un codage")
+    global erreur_carac, desaf_code, af_code, pas_meme_langue, pas_bonne_cle
+    if langue == "Francais" or langue == "fr":
+        titre1.config(text="Entrer un texte pour obtenir un code")
+        titre2.config(text ="Décryptage : entrer un texte à décrypter")
+        titre3.config(text ="Cryptage : entrer un texte à crypter")
+        bouton_texte.config(text="Générer le code")
+        bouton_decrypte.config(text="Décrypter")
+        bouton_decode.config(text="Crypter")
+        bouton_open_file_a_crypter.config(text="Ouvrir un fichier à crypter")
+        bouton_open_file_a_decrypter.config(text="Ouvrir un fichier à décrypter")
+        bouton_save_crypter.config(text="Sauvegarder le cryptage")
+        bouton_save_decrypter.config(text="Sauvegarder le décryptage")
+        bouton_save_cle.config(text="Sauvegarder la clé de cryptage")
+        bouton_open_file_obtenir_code.config(text="Ouvrir un fichier pour avoir un code")
         option.config(text="Choix Langue")
-        erreur_carac = "n'est pas dans le texte servant a coder"
-        bouton_afficher.config(text="afficher le code" if bouton_afficher["text"] == af_code else "désafficher le code")
-        desaf_code = "désafficher le code"
-        af_code = "afficher le code"
+        erreur_carac = "n'est pas dans le texte servant à coder"
+        bouton_afficher.config(text="Afficher le code" if bouton_afficher["text"] == af_code else "Désafficher le code")
+        desaf_code = "Désafficher le code"
+        af_code = "Afficher le code"
+        pas_meme_langue = "Ce n'est pas la même langue"
+        pas_bonne_cle = "Ce n'est pas la bonne clé"
 
-    elif langue == "English":
+    elif langue == "English" or langue == "en":
         titre1.config(text="Enter text to get coding")
-        titre2.config(text ="decryption : ")
-        titre3.config(text ="encryption : ")
+        titre2.config(text ="Decryption : ")
+        titre3.config(text ="Encryption : ")
         bouton_texte.config(text="Generate the code")
-        bouton_decrypte.config(text="Unencrypte")
-        bouton_decode.config(text="encrypt")
-        bouton_open_file_a_crypter.config(text="open a file to encrypt")
-        bouton_open_file_a_decrypter.config(text="open file to decrypt")
-        bouton_save_crypter.config(text="save encryption")
-        bouton_save_decrypter.config(text="save decryption")
-        bouton_save_cle.config(text="save key of encrypt")
-        bouton_open_file_obtenir_code.config(text="open file to get coding")
+        bouton_decrypte.config(text="Unencrypt")
+        bouton_decode.config(text="Encrypt")
+        bouton_open_file_a_crypter.config(text="Open a file to encrypt")
+        bouton_open_file_a_decrypter.config(text="Open a file to decrypt")
+        bouton_save_crypter.config(text="Save encryption")
+        bouton_save_decrypter.config(text="Save decryption")
+        bouton_save_cle.config(text="Save key of encrypt")
+        bouton_open_file_obtenir_code.config(text="Open file to get coding")
         option.config(text="Choose language")
         erreur_carac = "isn't in the coding text"
         bouton_afficher.config(text="Show the code" if bouton_afficher["text"] == af_code else "Hide the code")
         desaf_code = "Hide the code"
         af_code = "Show the code"
+        pas_meme_langue = "This is not the same language"
+        pas_bonne_cle = "This is not the right key"
 
-    elif langue == "Español":
+    elif langue == "Español" or langue == "es":
         titre1.config(text="Ingrese el texto para obtener la codificación")
-        titre2.config(text ="cifrado : ")
-        titre3.config(text ="descifrado : ")
+        titre2.config(text ="Cifrado : ")
+        titre3.config(text ="Descifrado : ")
         bouton_texte.config(text="Generar el código")
         bouton_decrypte.config(text="Descifrar")
-        bouton_decode.config(text="encriptar")
-        bouton_open_file_a_crypter.config(text="abrir un archivo para cifrar")
-        bouton_open_file_a_decrypter.config(text="abrir archivo para descifrar")
-        bouton_save_crypter.config(text="guardar cifrado")
-        bouton_save_decrypter.config(text="guardar descifrado")
-        bouton_save_cle.config(text="guardar clave de cifrado")
-        bouton_open_file_obtenir_code.config(text="abrir archivo para obtener codificación")
+        bouton_decode.config(text="Encriptar")
+        bouton_open_file_a_crypter.config(text="Abrir un archivo para cifrar")
+        bouton_open_file_a_decrypter.config(text="Abrir archivo para descifrar")
+        bouton_save_crypter.config(text="Guardar cifrado")
+        bouton_save_decrypter.config(text="Guardar descifrado")
+        bouton_save_cle.config(text="Guardar clave de cifrado")
+        bouton_open_file_obtenir_code.config(text="Abrir archivo para obtener codificación")
         option.config(text="Elección de la lengua")
         erreur_carac = "no figura en el texto utilizado para codificar"
-        bouton_afficher.config(text="visualizar el código" if bouton_afficher["text"] == af_code else "desactivar el código")
-        desaf_code = "desactivar el código"
-        af_code = "visualizar el código"
+        bouton_afficher.config(text="Visualizar el código" if bouton_afficher["text"] == af_code else "Desactivar el código")
+        desaf_code = "Desactivar el código"
+        af_code = "Visualizar el código"
+        pas_meme_langue = "No es la misma lengua"
+        pas_bonne_cle = "Esta no es la llave correcta"
 
-    elif langue == "Deutsch":
+    elif langue == "Deutsch" or langue == "de":
         titre1.config(text="Öffnen Sie die Datei, um die Codierung zu erhalten")
         titre2.config(text ="Entschlüsselung : ")
         titre3.config(text ="Verschlüsselung : ")
@@ -173,8 +182,10 @@ def language(langue):  # a changer
         bouton_afficher.config(text="Code anzeigen" if bouton_afficher["text"] == af_code else "Code ausblenden")
         desaf_code = "Code ausblenden"
         af_code = "Code anzeigen"
+        pas_meme_langue = "Es ist nicht dieselbe Sprache"
+        pas_bonne_cle = "Es ist nicht der richtige Schlüssel"
 
-    elif langue == "中国人":
+    elif langue == "中国人" or langue == "zh-cn":
         titre1.config(text="输入文字获取编码")
         titre2.config(text ="解密 : ")
         titre3.config(text ="加密 : ")
@@ -192,76 +203,104 @@ def language(langue):  # a changer
         bouton_afficher.config(text="显示代码" if bouton_afficher["text"] == af_code else "禁用代码")
         desaf_code = "禁用代码"
         af_code = "显示代码"
+        pas_meme_langue = "不是同一种语言"
+        pas_bonne_cle = "这不是正确的钥匙"
 
 
 def afficher_dico():
     """
     La fonction ne prend pas d'argument.
-    Elle permet d'afficher le dictionnaire contenant le codage dans la fenetre graphique.
+    Elle permet d'afficher le dictionnaire contenant le codage dans la fenêtre graphique.
     """
     if crypter["text"] == "":
-        crypter.config(text=str(getDictText(text.get())))
+        crypter.config(text=str(dict))
         bouton_afficher.config(text=desaf_code)
     else:
         crypter.config(text="")
         bouton_afficher.config(text=af_code)
 
 
-
 def verfi_lang():
     """
     La fonction ne prend pas d'argument.
-    Elle permet de connaitre la langue du texte où les statitiques sont faites et la langue du texte à crypter.
-    ELle renvoie Vrai si la langue est la meme sinon elle renvoie Faux.
+    Elle permet de connaitre la langue du texte où les statistiques sont faites et la langue du texte à crypter.
+    Elle renvoie Vrai si la langue est la même sinon elle renvoie Faux.
     """
-    langue_codage = detect(boite_texte.get())
-    langue_text_a_crypter = detect(decode_label.get())
+    langue_codage = detect(texte_codant)
+    langue_text_a_crypter = detect(texte_a_crypter)
     if langue_codage == langue_text_a_crypter:
         return True
     else:
         return False
 
 
-def open_file():
+def open_file(parametre):
     """
     La fonction ne prend pas d'argument.
-    Elle permet d'ouvir un fichier pour obtenir un texte.
+    Elle permet d'ouvrir un fichier pour obtenir un texte.
     """
+    global texte_codant, texte_a_crypter, texte_a_decrypter
     file = filedialog.askopenfile()
-    if file is not None:
-        content = file.read()
+    if file is not None and parametre == 0:
+        texte_codant = file.read()
         file.close()
-        print(content)
-        return content
-
-
-def create_file():
-    """
-    La fonction ne prend pas d'argument.
-    Elle permet de créer un fichier.
-    """
-    file = filedialog.askopenfile()
-    if file is not None:
-        content = file.read()
-        print(content)
+        return texte_codant
+    if file is not None and parametre == 1:
+        texte_a_crypter = file.read()
         file.close()
+        return texte_a_crypter
+    if file is not None and parametre == 2:
+        texte_a_decrypter = file.read()
+        file.close()
+        return texte_a_decrypter
 
 
 def save_text(text):
     """
     La fonction prend en argument un texte.
-    Elle permet de sauvegarder le cryptage/decryptage d'un texte.
+    Elle permet de sauvegarder le cryptage/décryptage d'un texte.
     """
     file_path = filedialog.asksaveasfilename(defaultextension=".txt")
     with open(file_path, "w") as f:
         f.write(text)
 
 
-# widgets
+def nouv_arbre(text):
+    """
+    La fonction prend un texte en argument et permet d'instancier un arbre, son texte et son dictionnaire.
+    """
+    global arbre, texte_codant, dict
+    arbre = ArbreB.create_tree(Sommet.make_list(comptage_lettre(text)))
+    texte_codant = text
+    dict = ArbreB.codage(arbre)
+    language(detect(texte_codant))
+    return arbre, texte_codant, dict
+
+
+def getTextDecrypter(text):
+    """
+    La fonction permet de récupérer le texte à décrypter.
+    """
+    global texte_a_crypter
+    texte_a_crypter = text
+    return texte_a_crypter
+
+
+# Initialisation des variables
+arbre = None
+texte_codant = None
+dict = None
+texte_a_crypter = None
+texte_a_decrypter = None
 text = tk.StringVar()
 decrypte = tk.StringVar()
 text_a_decoder = tk.StringVar()
+af_code, desaf_code = "Afficher le code", "Désafficher le code"
+erreur_carac = "n'est pas dans le texte servant à coder"
+pas_meme_langue = "Ce n'est pas la même langue"
+pas_bonne_cle = "Ce n'est pas la bonne clé"
 
+# Bouton changer de langue
 option = tk.Menubutton(root, text="Choix Langues", relief="raised")
 option.menu = tk.Menu(option)
 liste_option = ["Francais", "English", "Español","Deutsch","中国人"]
@@ -271,55 +310,79 @@ for options in liste_option:
 option["menu"] = option.menu
 option.grid(row=0, column=0, sticky="w")
 
+# bouton open file
+bouton_save_cle = tk.Button(root, text="Sauvegarder la clé de cryptage",
+                            command=lambda: save_text(str(getDictText(text.get()))), state="disabled")
+bouton_save_cle.grid(row=3, column=0, sticky="w")
 
-af_code, desaf_code = "afficher le code", "désafficher le code"
-erreur_carac = "n'est pas dans le texte servant a coder"
-titre1 = tk.Label(root, text="Entrez un texte pour obtenir un codage")
+bouton_save_crypter = tk.Button(root, text="Sauvegarder le cryptage",
+                                command=lambda: save_text(result_codage.cget("text")), state="disabled")
+bouton_save_crypter.grid(row=7, column=0, sticky="w")
+
+bouton_save_decrypter = tk.Button(root, text="Sauvegarder le decryptage",
+                                  command=lambda: save_text(decrypter.cget("text")), state="disabled")
+bouton_save_decrypter.grid(row=1, column=5, sticky="w")
+
+
+titre1 = tk.Label(root, text="Entrer un texte pour obtenir un code")
 titre1.grid(row=1, column=0)
-bouton_open_file_obtenir_code = tk.Button(root, text="ouvrir un fichier pour avoir un code", command=lambda: [effacer_canvas(canvas), dessin(
-    canvas, ArbreB.create_tree(Sommet.make_list(comptage_lettre(open_file())))), bouton_afficher.config(state="normal"), bouton_save_cle.config(state="normal")], width=30)
+
+bouton_open_file_obtenir_code = tk.Button(root, text="Ouvrir un fichier pour avoir un code", command=lambda: [effacer_canvas(canvas), nouv_arbre(open_file(0)),
+                                          dessin(canvas, arbre), bouton_afficher.config(state="normal"), bouton_save_cle.config(state="normal"),
+                                          bouton_decode.config(state="normal"), bouton_decrypte.config(state="normal")], width=30)
 bouton_open_file_obtenir_code.grid(row=1, column=1)
-boite_texte = tk.Entry(root, textvariable=text, width=50)
-boite_texte.grid(row=2, column=0)
+
+boite_texte = tk.Entry(root, textvariable=text)
+boite_texte.grid(row=2, column=0, ipadx=100, ipady=10)
 boite_texte.focus()
-bouton_texte = tk.Button(root, text="Générer le code", command=lambda: [effacer_canvas(canvas), dessin(
-    canvas, ArbreB.create_tree(Sommet.make_list(comptage_lettre(text.get())))), bouton_afficher.config(state="normal"), bouton_save_cle.config(state="normal")], width=30)
+
+bouton_texte = tk.Button(root, text="Générer le code", command=lambda: [effacer_canvas(canvas), nouv_arbre(text.get()),
+                         dessin(canvas, arbre), bouton_afficher.config(state="normal"), bouton_save_cle.config(state="normal"),
+                         bouton_decode.config(state="normal"), bouton_decrypte.config(state="normal")], width=30)
 bouton_texte.grid(row=2, column=1)
-bouton_afficher = tk.Button(
-    root, text=af_code, command=afficher_dico, width=30, state="disabled")
+
+bouton_afficher = tk.Button(root, text=af_code, command=afficher_dico, width=30, state="disabled")
 bouton_afficher.grid(row=3, column=1)
+
 crypter = tk.Label(root, text="", wraplength=300, anchor="e")
 crypter.grid(row=3, column=0, columnspan=3)
 
-titre3 = tk.Label(root, text="cryptage : ")
+titre3 = tk.Label(root, text="Cryptage : entrer un texte à crypter")
 titre3.grid(row=4, column=0, sticky="w")
-bouton_open_file_a_crypter = tk.Button(root, text="ouvrir un fichier à crypter", command=lambda: result_codage.config(
-    text=code_texte(getDictText(text.get()), open_file())), width=30)
+
+bouton_open_file_a_crypter = tk.Button(root, text="Ouvrir un fichier à crypter", command=lambda: (result_codage.config(text=
+                                       code_texte(getDictText(arbre), open_file(1))), bouton_save_crypter.config(state="normal")), width=30)
 bouton_open_file_a_crypter.grid(row=5, column=0)
+
 decode_label = tk.Entry(root, textvariable=text_a_decoder)
 decode_label.grid(row=6, column=0, ipadx=100, ipady=10)
-bouton_decode = tk.Button(root, text="crypter", command=lambda: result_codage.config(
-    text=code_texte(getDictText(text.get()), text_a_decoder.get())), width=30)
+
+bouton_decode = tk.Button(root, text="Crypter", command=lambda: (result_codage.config(text=
+                          code_texte(getDictText(arbre), getTextDecrypter(text_a_decoder.get()))), bouton_save_crypter.config(state="normal")),
+                          width=30, state="disabled")
 bouton_decode.grid(row=6, column=1)
+
 result_codage = tk.Label(root, text="")
 result_codage.grid(row=7, column=0)
 
-
-titre2 = tk.Label(root, text="décryptage : ")
+titre2 = tk.Label(root, text="Décryptage : entrer un texte à décrypter")
 titre2.grid(row=8, column=0, sticky="w")
-bouton_open_file_a_decrypter = tk.Button(root, text="ouvrir un fichier à decrypter", command=lambda: decrypter.config(
-    text=decrypte_texte(getDictText(text.get()), open_file()), width=30))
+
+bouton_open_file_a_decrypter = tk.Button(root, text="Ouvrir un fichier à décrypter", command=lambda: (decrypter.config(text=
+                                         decrypte_texte(dict, open_file(2))), bouton_save_decrypter.config(state="normal")), width=30)
 bouton_open_file_a_decrypter.grid(row=8, column=0)
+
 decrypte_label = tk.Entry(root, textvariable=decrypte)
 decrypte_label.grid(row=9, column=0, ipadx=100, ipady=10)
-# bouton_decrypte = tk.Buttol(root), text="Décrypter", command=lambda : decrypter.config(text=decrypte_texte(getDictText(text.get()),decrypte.get())), width=30)
-bouton_decrypte = tk.Button(root, text="Décrypter", command=lambda: decrypter.config(
-    text=decrypte_texte(getDictText(text.get()), decrypte.get())), width=30)
+
+bouton_decrypte = tk.Button(root, text="Décrypter", command=lambda: (decrypter.config(text=
+                            decrypte_texte(dict, decrypte.get())), bouton_save_decrypter.config(state="normal")), width=30, state="disabled")
 bouton_decrypte.grid(row=9, column=1)
+
 decrypter = tk.Label(root, text="")
 decrypter.grid(row=10, column=0)
 
-
+# Canvas et scrollbars
 frame = tk.Frame(root, height=LARGEUR, width=LONGUEUR)
 canvas = tk.Canvas(frame, height=LARGEUR, width=LONGUEUR,
                    bg="white", scrollregion=(-200, -10, 1000, 1000))
@@ -331,28 +394,4 @@ canvas.config(xscrollcommand=xbar.set, yscrollcommand=ybar.set)
 canvas.pack(expand=True, fill="both")
 frame.grid(row=11, columnspan=2, column=0)
 
-
-# bouton open file
-bouton_save_cle = tk.Button(root, text="sauvegarder la clé de cryptage",
-                            command=lambda: save_text(str(getDictText(text.get()))), state="disabled")
-bouton_save_cle.grid(row=3, column=0, sticky="w")
-bouton_save_crypter = tk.Button(
-    root, text="sauvegarder le cryptage", command=lambda: save_text(result_codage.cget("text")))
-bouton_save_crypter.grid(row=7, column=0, sticky="w")
-bouton_save_decrypter = tk.Button(
-    root, text="sauvegarder le decryptage", command=lambda: save_text(decrypter.cget("text")))
-bouton_save_decrypter.grid(row=1, column=5, sticky="w")
-
-
 root.mainloop()
-
-
-
-# TACHES A TERMINER 90%:
-
-
-#  améliorer module arbre
-#  vérifier les bugs
-#  contre-rendue
-#  améliorer l'interface
-#  recréer les apps windows/mac
