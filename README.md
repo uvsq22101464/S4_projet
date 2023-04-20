@@ -49,13 +49,14 @@ Librairie utilisés:
 
 - tkinter
 - maths
-
+- languedetect
 
 
 Module arbre (ethan.py):
 
 Création de deux classes Sommet et Arbre.
 
+ethan fait cette partie :)
 
 Interface (interface.py):
 
