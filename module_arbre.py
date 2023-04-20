@@ -1,30 +1,41 @@
-import math
 class ArbreB(object):
     def __init__(self, racine=None):
         self.racine = racine
 
     def getRacine(self):
         return self.racine
+    
+
     def setRacine(self, nouvRacine):
         self.racine = nouvRacine
 
+
     def recherche_sommet(self, nom):
         """
-        Prend un ArbreB et appel la fonction sur sa racine qui est un Sommet
+        Prends un ArbreB et appel la méthode sur sa racine qui est un Sommet.
         """
         if type(self) == ArbreB:
-            return self.getRacine().recherche_sommet(nom)
+            if type(nom) == Sommet:
+                return self.getRacine().recherche_sommet(nom, Sommet)
+            elif type(nom) == str:
+                return self.getRacine().recherche_sommet(nom, str)
+            else:
+                raise TypeError("la valeur doit être un Sommet ou un str")
+
 
     def fusion_arbre(self, sommet1, sommet2):
         """
-        Prend deux Sommet en entré et renvois un nouveau Sommet qui est le père des deux Sommets
-        avec les valeurs des deux combinner
+        Prends deux Sommets en entrée et renvoie un nouveau Sommet qui est le père des deux Sommets
+        avec les valeurs des deux combiné.
         """
         return Sommet(sommet1.valeur + sommet2.valeur, sommet1.nom + sommet2.nom, sommet1, sommet2)
     
+    def __add__(self, sommet1, sommet2):
+        return self.fusion_arbre(sommet1, sommet2)
+    
     def profondeur_arbre(self, profondeur=0):
         """
-        Prend un ArbreB en entré et retourne sa profondeur maximale
+        Prends un ArbreB en entrée et retourne sa profondeur maximale.
         """
         if type(self) == ArbreB:
             self = self.getRacine()
@@ -34,7 +45,7 @@ class ArbreB(object):
     
     def largeur_arbre(self):
         """
-        Prend un ArbreB en entré en retourne sa largeur totale, sa largeur à gauche et sa largeur à droite
+        Prends un ArbreB en entrée en retourne sa largeur totale, sa largeur à gauche et sa largeur à droite.
         """
         if type(self) == ArbreB:
             self = self.getRacine()
@@ -44,10 +55,10 @@ class ArbreB(object):
 
     def create_tree(liste_sommet):
         """
-        Prend une liste de Sommet en entré et retourne un objet ArbreB dont la racine est le sommet de plus haute valeur
+        Prends une liste de Sommet en entrée et retourne un objet ArbreB dont la racine est le sommet de plus haute valeur.
         """
         if len(liste_sommet) < 2:
-            raise "il doit y avoir 2 ou plus caractères différents"
+            raise "Il doit y avoir 2 ou plus caractères différents pour avoir un arbre."
         for _ in range(len(liste_sommet)-1):
             liste_sommet[0] = ArbreB.fusion_arbre(ArbreB, liste_sommet[0], liste_sommet[1])
             del liste_sommet[1]
@@ -56,25 +67,40 @@ class ArbreB(object):
     
     def codage(self, code_sommet="", dico={}, all=False):
         """
-        Prend un ArbreB et appel la fonction sur sa racine qui est un Sommet
+        Prends un ArbreB et appel la méthode sur sa racine qui est un Sommet
         """
         if type(self) == ArbreB:
-            return self.racine.codage(code_sommet, dico, all)
+            return self.getRacine().codage(code_sommet, {}, all)
         
-    def insertion_sommet(self, valeur, nom, liste_sommet):
-        liste_sommet.append(Sommet(valeur, nom))
+    def insertion_sommet(self, sommet):
+        """
+        La méthode prend un ArbreB et un Sommet en argument et renvoi un nouvel arbre avec le Sommet inséré.
+        """
+        liste_sommet = self.getListeFeuille()
+        liste_sommet.append(sommet)
         return ArbreB.create_tree(liste_sommet)
+    
+    def __iadd__(self, sommet):
+        return self.insertion_sommet(sommet)
 
-    def suppression_sommet(self, nom, liste_sommet):
+    def suppression_sommet(self, nom):
         """
+        Prends en entrée un ArbreB, un nom de Sommet ou un Sommet et renvoi l'ArbreB sans ce sommet.
+        """
+        liste_sommet = self.getListeFeuille()
+        find = self.recherche_sommet(nom)
+        if find != None:
+            liste_sommet.remove(find)
+            return ArbreB.create_tree(liste_sommet)
+        else:
+            raise ValueError("Le sommet n'existe pas dans l'arbre")
         
-        """
-        liste_sommet.remove(self.recherche_sommet(nom))
-        return ArbreB.create_tree(liste_sommet)
+    def  __isub__(self, nom):
+        return self.suppression_sommet(nom)
     
     def dessinerArbre(self, canvas, largeur_canvas, x=0, y=0, cpt=1, largeur=0, profondeur=0, taille=[0, 0], posXSuivant=0):
         """
-        Prend un ArbreB et appel la fonction sur sa racine qui est un Sommet
+        Prends un ArbreB et appel la méthode sur sa racine qui est un Sommet.
         """
         if type(self) == ArbreB:
             self = self.getRacine()
@@ -82,11 +108,24 @@ class ArbreB(object):
 
     def nb_noeud(self):
         """
-        Prend un ArbreB et appel la fonction sur sa racine qui est un Sommet
+        Prends un ArbreB et appel la méthode sur sa racine qui est un Sommet.
         """
         if type(self) == ArbreB:
             return self.getRacine().nb_noeud()
-    
+        
+    def getListeSommet(self):
+        """
+        Prends un ArbreB et appel la méthode sur sa racine qui est un Sommet.
+        """
+        if type(self) == ArbreB:
+            return self.getRacine().getListeSommet([])
+        
+    def getListeFeuille(self):
+        """
+        Prends un ArbreB et appel la méthode sur sa racine qui est un Sommet.
+        """
+        if type(self) == ArbreB:
+            return self.getRacine().getListeFeuille([])
 
 class Sommet(ArbreB):
     def __init__(self, valeur, nom, fils_gauche=None, fils_droit=None):
@@ -114,32 +153,25 @@ class Sommet(ArbreB):
 
     def __str__(self):
         """
-        Prend un Sommet et permet d'afficher sa valeur, son nom, son fils gauche et son fils droit
+        Prends un Sommet et permet d'afficher sa valeur, son nom, son fils gauche et son fils droit.
         """
         return f"{self.getValeur(), self.getNom(), self.getGauche(), self.getDroit()}"
     
         
-    def make_list(liste_occurence : list):
+    def make_list(liste_occurence):
         """
-        Prend en entré une liste de tuple (lettre, occurence) et renvois une liste contenant les Sommets de ces tuples
+        Prends en entrée une liste de tuple (lettre, occurRence) et renvoie une liste contenant les Sommets de ces tuples.
         """
         liste_sommet = []
         for nom, valeur in liste_occurence:
             liste_sommet.append(Sommet(valeur, nom))
         return liste_sommet
 
-    def make_list2(dict_occurence : dict):
-        """
-        Prend en entré un dictionnaire (lettre, occurence) et renvois une liste contenant les Sommets de ces tuples
-        """
-        liste_sommet = []
-        for nom, valeur in dict_occurence.items():
-            liste_sommet.append(Sommet(valeur, nom))
-        return liste_sommet
 
     def codage(self, code_sommet="", dico={}, all=False):
         """
-        La fonction prend un Sommet et retourne un dictionnaire contenant le code d'Huffman associer
+        La méthode prend un Sommet et retourne un dictionnaire contenant le code d'Huffman associer,
+        la variable all permet d'obtenir le dictionnaire pour tous les Sommets de l'ArbreB.
         """
         if self.getGauche() != None:
             self.getGauche().codage(code_sommet+"0", dico, all)
@@ -148,24 +180,32 @@ class Sommet(ArbreB):
         if len(self.getNom()) == 1 and all == False:
             dico[self.getNom()] = code_sommet
         if all != False:
-            dico[self.getNom()] = code_sommet 
+            dico[self.getNom()] = code_sommet
         return dico
     
-    def recherche_sommet(self, nom):
+    def recherche_sommet(self, nom, type):
             """
-            La fonction prend en argument un nom de sommet et renvoie le Sommet si il est dans l'arbre sison None
+            La méthode prend en argument un nom de Sommet ou un Sommet et renvoie le Sommet s'il est dans l'arbre sinon None.
             """
-            if self.getNom() == nom:
-                return self
-            elif self.getGauche() != None and self.getDroit() != None:
-                return self.getGauche().recherche_sommet(nom) or self.getDroit().recherche_sommet(nom)
+            if type == str:
+                if self.getNom() == nom:
+                    return self
+                elif self.getGauche() != None and self.getDroit() != None:
+                    return self.getGauche().recherche_sommet(nom, type) or self.getDroit().recherche_sommet(nom, type)
+                else:
+                    return None
             else:
-                return None
+                if self == nom:
+                    return self
+                elif self.getGauche() != None and self.getDroit() != None:
+                    return self.getGauche().recherche_sommet(nom, type) or self.getDroit().recherche_sommet(nom, type)
+                else:
+                    return None
 
     def dessinerArbre(self, canvas, largeur_canvas, x=0, y=0, cpt=1, largeur=0, profondeur=0, taille=[0, 0], posXSuivant=0):
         """
-        La fonction prend en argument un canvas, sa largeur, une position de départ x et y, la profondeur de l'arbre
-        une taille de qui permet de mettre à jour la scrollbar et la position X de point suivant
+        La méthode prend en argument un canvas, sa largeur, une position de départ x et y, la profondeur de l'arbre,
+        une taille qui permet de mettre à jour la scrollbar et la position X de point suivant.
         """
         posYSuivant = largeur_canvas // profondeur * cpt
         if self.getGauche() == None and self.getDroit() == None:
@@ -183,10 +223,28 @@ class Sommet(ArbreB):
 
     def nb_noeud(self, nb=1):
         """
-        La fonction renvoie le nombre de noeuds de l'arbre + 1
+        La méthode renvoie le nombre de noeuds de l'arbre passé en argument + 1.
         """
         nb += 1
         if self.getGauche() != None and self.getDroit() != None:
             return self.getGauche().nb_noeud() + self.getDroit().nb_noeud()
         return nb
- 
+    
+    def getListeSommet(self, liste_sommet=[]):
+        """
+        Prends en argument un ArbreB et retourne une liste de tous ses Sommets.
+        """
+        if self.getGauche() != None and self.getDroit() != None:
+            self.getGauche().getListeSommet(liste_sommet), self.getDroit().getListeSommet(liste_sommet)
+        liste_sommet.append(self)
+        return liste_sommet
+
+    def getListeFeuille(self, liste_sommet=[]):
+        """
+        Prends en argument un ArbreB et retourne une liste de ses feuilles.
+        """
+        if self.getGauche() != None and self.getDroit() != None:
+            self.getGauche().getListeFeuille(liste_sommet), self.getDroit().getListeFeuille(liste_sommet)
+        else:
+            liste_sommet.append(self)
+        return liste_sommet
