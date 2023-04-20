@@ -1,10 +1,10 @@
-Auteurs du Projet:
+# Auteurs du Projet:
 
 - Sam Barbosa
 - Ethan Mache
 
 
-Présentation Projet :
+# Présentation Projet :
 
 Le but du projet est de coder un texte selon le codage de Hauffman. Puis de crypter un text selon le codage obtenu et ensuite de de pourvoir le décrypter.
 
@@ -31,7 +31,7 @@ ATTENTION !!
 - si ...
 
 
-Explication du code :
+# Explication du code :
 
 Librairie utilisés:
 
