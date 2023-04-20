@@ -9,7 +9,7 @@
 Le but du projet est de coder un texte selon le codage de Hauffman. Puis de crypter un text selon le codage obtenu et ensuite de de pourvoir le décrypter.
 
 
-Guide d'utilisation de l'application :
+# Guide d'utilisation de l'application :
 
 En haut à gauche un menu déroulant "choix langues" qui permet de choisir la langue. Saississez la langue de votre choix.
 (francais, anglais, allemand, espagnol, chinnois)
