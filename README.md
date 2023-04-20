@@ -8,8 +8,8 @@
 
 Le but du projet est de coder un texte selon le codage de Hauffman. Puis de crypter un text selon le codage obtenu et ensuite de de pourvoir le décrypter.
 
-![App Screenshot] (/Users/sambarbosa/visual_studio_code/S4_projet/Screenshot 2023-04-20 at 16.39.08.png)
 
+![Exemple d'image] (Screenshot 2023-04-20 at 16.39.08.png)
 
 # Guide d'utilisation de l'application :
 
