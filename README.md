@@ -67,7 +67,34 @@ ethan fait cette partie :)
  
  #### La fonction getDictText :
  * Donne le dictionnaire du code associé au texte
- 
+
  #### La fonction code_texte :
  * La fonction prend en argument un dictionnaire et un texte saisi par l'utilisateur. La fonction renvoie un texte crypté selon le dictionnaire si la langue des deux textes est la même sinon elle renvoie un message 'ce n'est pas la meme langue'.
 
+ #### La fonction decrypte_texte :
+ * La focntion prend en argument un dicctionnaire et un text saisie par l'utilisateur. La focntion renvoie un text decrypter selon le dictionnaire.
+
+ #### La fonction dessin :
+ * ethan :)
+
+ #### La fonction effacer_canvas :
+ * La fonction prend en argument un canvas. Elle permet d'effacer les éléments dans le canvas.
+
+ #### La fonction language :
+ * La fonction prend en argument la langue. Elle permet de changer la langue selon la langue choisie par l'utilisateur.
+
+ #### La fonction afficher_dico :
+ * La fonction ne prend pas d'argument. Elle permet d'afficher le dictionnaire contenant le codage dans la fenetre graphique.
+
+ #### La fonction verfi_lang :
+ * La fonction ne prend pas d'argument. Elle permet de connaitre la langue du texte où les statitiques sont faites et la langue du texte à crypter. ELle renvoie Vrai si la langue est la meme sinon elle renvoie Faux.
+
+ #### La fonction open_file :
+ * La fonction ne prend pas d'argument. Elle permet d'ouvir un fichier pour obtenir un texte.
+
+ #### La fonction  create_file :
+ * La fonction ne prend pas d'argument. Elle permet de créer un fichier.
+
+ #### La focntion save_text :
+ * La fonction prend en argument un texte.
+    Elle permet de sauvegarder le cryptage/decryptage d'un texte.
