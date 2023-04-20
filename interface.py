@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import filedialog
-from langdetect import detect
+from langdetect import detect_langs
 from module_arbre import *
 import math
 
@@ -62,10 +62,10 @@ def decrypte_texte(dico, text: str):
             if val == tmp:
                 result += key
                 tmp = ""
-    if detect(result) == detect(texte_codant):
+    if detection_langue(detect_langs(result)) == detection_langue(detect_langs(texte_codant)):
         return result
     else:
-        return f"{pas_bonne_cle}"
+        return f"{result} | {pas_bonne_cle}"
 
 
 def dessin(canvas: tk.Canvas, arbre: ArbreB):
@@ -207,6 +207,20 @@ def language(langue):
         pas_bonne_cle = "这不是正确的钥匙"
 
 
+def detection_langue(l_proba, liste_langue=["fr", "en", "es", "de", "zh-cn"]):
+    """
+    Prends en argument le résultat de la fonction detect_langs qui est une liste de probabilité
+    et retourne celle qui est la plus probable parmi les langues dans la liste_langue ou français si la langue n'est pas dans la liste.
+    """
+    for i in range(len(l_proba)):
+        langue = str(l_proba[i])[:2]
+        if langue in liste_langue:
+            return langue
+        else:
+            continue
+    return "fr"
+
+
 def afficher_dico():
     """
     La fonction ne prend pas d'argument.
@@ -226,8 +240,8 @@ def verfi_lang():
     Elle permet de connaitre la langue du texte où les statistiques sont faites et la langue du texte à crypter.
     Elle renvoie Vrai si la langue est la même sinon elle renvoie Faux.
     """
-    langue_codage = detect(texte_codant)
-    langue_text_a_crypter = detect(texte_a_crypter)
+    langue_codage = detection_langue(detect_langs(texte_codant))
+    langue_text_a_crypter = detection_langue(detect_langs(texte_a_crypter))
     if langue_codage == langue_text_a_crypter:
         return True
     else:
@@ -273,7 +287,7 @@ def nouv_arbre(text):
     arbre = ArbreB.create_tree(Sommet.make_list(comptage_lettre(text)))
     texte_codant = text
     dict = ArbreB.codage(arbre)
-    language(detect(texte_codant))
+    language(detection_langue(detect_langs(texte_codant)))
     return arbre, texte_codant, dict
 
 
