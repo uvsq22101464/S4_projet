@@ -58,9 +58,11 @@ Création de deux classes Sommet et Arbre.
 
 ethan fait cette partie :)
 
-Interface (interface.py):
+### Interface (interface.py):
 
- - la fonction "comptage lettre"
- - - prend une chaîne de caractère en entrée et renvoi une liste de tuple contenant les lettres qui apparaissent dans le  text et leur nombre d'occurence.
- - - on créer un ensemble  avec le text (set(text)) puis on itère dand cete ensemble chaque element un par un on ajoute chaque element à un dictionnaire ainsi que sa fréquence dans le text.
+ - la fonction "comptage lettre"prend une chaîne de caractère en entrée et renvoi une liste de tuple contenant les lettres qui apparaissent dans le  text et leur nombre d'occurence.
+ * on créer un ensemble  avec le text (set(text)) puis on itère dand cete ensemble chaque element un par un on ajoute chaque element à un dictionnaire ainsi que sa fréquence dans le text.
+ 
+
+
 
