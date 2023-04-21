@@ -48,8 +48,7 @@ ATTENTION !!
 - Soit vous entrer du texte dans la boîte de texte et appuyer sur le bouton "décrypter"
 - Soit vous cliquer sur le bouton "ouvrir un fichier à décrypter"
 ![Capture d'écran de mon application](Screenshot%202023-04-21%20at%2017.47.47.png)
-ATTENTION !!
-- si ...
+
 
 # Architecture :
 
