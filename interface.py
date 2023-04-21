@@ -7,7 +7,7 @@ import math
 
 root = tk.Tk()
 root.title("Projet crypto")
-LONGUEUR, LARGEUR = 1200, 350
+LONGUEUR, LARGEUR = 1200, 300
 
 # fonctions :
 def comptage_lettre(text):
@@ -37,6 +37,8 @@ def code_texte(dico, text):
     est la même sinon elle renvoie un message "ce n'est pas la même langue".
     """
     result = ""
+    if len(text) == 0:
+        return result
     if verfi_lang() == True:
         for carac in text:
             try:
@@ -55,6 +57,8 @@ def decrypte_texte(dico, text: str):
     """
     result = ""
     tmp = ""
+    if len(text) == 0:
+        return result
     for i in range(len(text)):
         if text[i] == " ":
             continue
@@ -251,7 +255,7 @@ def verfi_lang():
 
 def open_file(parametre):
     """
-    La fonction ne prend pas d'argument.
+    La fonction prend en argment un paramètre qui détermine sur quelle variable attribuée le texte.
     Elle permet d'ouvrir un fichier pour obtenir un texte.
     """
     global texte_codant, texte_a_crypter, texte_a_decrypter
@@ -327,16 +331,16 @@ option.grid(row=0, column=0, sticky="w")
 
 # bouton open file
 bouton_save_cle = tk.Button(root, text="Sauvegarder la clé de cryptage",
-                            command=lambda: save_text(str(getDictText(text.get()))), state="disabled")
-bouton_save_cle.grid(row=3, column=0)
+                            command=lambda: save_text(str(getDictText(arbre))), state="disabled")
+bouton_save_cle.grid(row=5, column=0)
 
 bouton_save_crypter = tk.Button(root, text="Sauvegarder le cryptage",
                                 command=lambda: save_text(result_codage.cget("text")), state="disabled")
-bouton_save_crypter.grid(row=10, column=0)
+bouton_save_crypter.grid(row=11, column=0)
 
 bouton_save_decrypter = tk.Button(root, text="Sauvegarder le decryptage",
                                   command=lambda: save_text(decrypter.cget("text")), state="disabled")
-bouton_save_decrypter.grid(row=15, column=0)
+bouton_save_decrypter.grid(row=16, column=0)
 
 
 titre1 = tk.Label(root, text="Codage : entrer un texte pour obtenir un code")
@@ -363,39 +367,39 @@ dictionnaire = tk.Label(root, text="", wraplength=1000, anchor="e")
 dictionnaire.grid(row=4, column=0)
 
 titre3 = tk.Label(root, text="Cryptage : entrer un texte à crypter")
-titre3.grid(row=5, column=0, sticky="w")
+titre3.grid(row=6, column=0, sticky="w")
 
 bouton_open_file_a_crypter = tk.Button(root, text="Ouvrir un fichier à crypter", command=lambda: (result_codage.config(text=
                                        code_texte(getDictText(arbre), open_file(1))), bouton_save_crypter.config(state="normal")), width=30)
-bouton_open_file_a_crypter.grid(row=6, column=0)
+bouton_open_file_a_crypter.grid(row=7, column=0)
 
 decode_label = tk.Entry(root, textvariable=text_a_decoder)
-decode_label.grid(row=7, column=0, ipadx=100, ipady=10)
+decode_label.grid(row=8, column=0, ipadx=100, ipady=10)
 
 bouton_decode = tk.Button(root, text="Crypter", command=lambda: (result_codage.config(text=
                           code_texte(getDictText(arbre), getTextDecrypter(text_a_decoder.get()))), bouton_save_crypter.config(state="normal")),
                           width=30, state="disabled")
-bouton_decode.grid(row=7, column=1)
+bouton_decode.grid(row=8, column=1)
 
 result_codage = tk.Label(root, text="", wraplength=1000)
-result_codage.grid(row=8, column=0)
+result_codage.grid(row=9, column=0)
 
 titre2 = tk.Label(root, text="Décryptage : entrer un texte à décrypter")
-titre2.grid(row=11, column=0, sticky="w")
+titre2.grid(row=12, column=0, sticky="w")
 
 bouton_open_file_a_decrypter = tk.Button(root, text="Ouvrir un fichier à décrypter", command=lambda: (decrypter.config(text=
                                          decrypte_texte(dict, open_file(2))), bouton_save_decrypter.config(state="normal")), width=30)
-bouton_open_file_a_decrypter.grid(row=12, column=0)
+bouton_open_file_a_decrypter.grid(row=13, column=0)
 
 decrypte_label = tk.Entry(root, textvariable=decrypte)
-decrypte_label.grid(row=13, column=0, ipadx=100, ipady=10)
+decrypte_label.grid(row=14, column=0, ipadx=100, ipady=10)
 
 bouton_decrypte = tk.Button(root, text="Décrypter", command=lambda: (decrypter.config(text=
                             decrypte_texte(dict, decrypte.get())), bouton_save_decrypter.config(state="normal")), width=30, state="disabled")
-bouton_decrypte.grid(row=13, column=1)
+bouton_decrypte.grid(row=15, column=1)
 
 decrypter = tk.Label(root, text="", wraplength=1000)
-decrypter.grid(row=14, column=0)
+decrypter.grid(row=15, column=0)
 
 # Canvas et scrollbars
 frame = tk.Frame(root, height=LARGEUR, width=LONGUEUR)
@@ -407,6 +411,6 @@ xbar.pack(side="bottom", fill="x")
 ybar.pack(side="right", fill="y")
 canvas.config(xscrollcommand=xbar.set, yscrollcommand=ybar.set)
 canvas.pack(expand=True, fill="both")
-frame.grid(row=16, columnspan=2, column=0)
+frame.grid(row=17, columnspan=2, column=0)
 
 root.mainloop()
