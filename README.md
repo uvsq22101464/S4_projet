@@ -19,7 +19,7 @@ Le but du projet est de coder un texte selon le codage de Hauffman. Puis de cryp
 
 ### Autre solution en utilisant le code source directement
 
-* au préalable il faut installer python ainsi que les librairies tkinter, languedetect et math
+* au préalable il faut installer python ainsi que les librairies tkinter, languedetect et math (pip install [librairie])
 * dans le terminal tapez "python interface.py"
 
 # Guide d'utilisation de l'application :
