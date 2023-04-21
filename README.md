@@ -29,17 +29,6 @@ En haut à gauche un menu déroulant "choix langues" qui permet de choisir la la
 
 ![Capture d'écran de mon application](Screenshot%202023-04-20%20at%2017.26.41.png)
 
-# Architecture :
-
-- Quand un texte est écrit dans la section codage et que le bouton Générer le code est pressé, le bouton va effacer le canvas, créer un nouvel arbre avec comme texte le résultat de la fonction comptage_lettre qui va compter les occurrences de chaque lettre, puis être transformé en une liste de Sommets 
-grâce à la fonction make_list() de la classe Sommet pour enfin renvoyer l'arbre résultant de ArbreB.create_tree() 
-- Le texte va être analysé pour connaître sa langue et changer la langue de la fenêtre si besoin.
-- L'ArbreB va ensuite être dessiné dans le canvas et débloquer les boutons suivants.
-- Une fois le code généré il est possible de le sauvegarder, de crypter un texte de même langue ou de décrypter un texte tout en vérifiant s'il a été codé selon le code généré (pas de message affiché si c'est le bon), une fois crypter ou décrypter pressé il est possible de sauvegarder ce résultat.
-- L'ArbreB de codage peut-être modifié à tout moment il suffira de re cliquer sur le bouton Générer le code et d'actualiser au besoin les autres résultats en appuyant de nouveau sur les boutons.
-- L'interface propose aussi un bouton permettant d'afficher et de désafficher le dictionnaire de codage, si le dictionnaire est trop grand il est préférable de le cacher pour que la taille de la fenêtre ne soit pas trop impactée.
-- Il est aussi possible d'ouvrir des fichiers textes pour les lires ou les décrypter.
-- Un bouton choix de langue est situé en haut à gauche de la fenêtre pour changer la langue de la fenêtre parmi Français, Anglais, Espagnol, Allemand ou Chinois.
 
 ### Pour obtenir un codage :
 - Soit vous entrer du texte dans la boîte de texte soit vous cliquer sur le bouton "ouvrir un fichier pour obtenir un ocdage" ensuite si vous voulez voir le codage appuyer sur afficher le code.
@@ -61,6 +50,18 @@ ATTENTION !!
 ![Capture d'écran de mon application](Screenshot%202023-04-21%20at%2017.47.47.png)
 ATTENTION !!
 - si ...
+
+# Architecture :
+
+- Quand un texte est écrit dans la section codage et que le bouton Générer le code est pressé, le bouton va effacer le canvas, créer un nouvel arbre avec comme texte le résultat de la fonction comptage_lettre qui va compter les occurrences de chaque lettre, puis être transformé en une liste de Sommets 
+grâce à la fonction make_list() de la classe Sommet pour enfin renvoyer l'arbre résultant de ArbreB.create_tree() 
+- Le texte va être analysé pour connaître sa langue et changer la langue de la fenêtre si besoin.
+- L'ArbreB va ensuite être dessiné dans le canvas et débloquer les boutons suivants.
+- Une fois le code généré il est possible de le sauvegarder, de crypter un texte de même langue ou de décrypter un texte tout en vérifiant s'il a été codé selon le code généré (pas de message affiché si c'est le bon), une fois crypter ou décrypter pressé il est possible de sauvegarder ce résultat.
+- L'ArbreB de codage peut-être modifié à tout moment il suffira de re cliquer sur le bouton Générer le code et d'actualiser au besoin les autres résultats en appuyant de nouveau sur les boutons.
+- L'interface propose aussi un bouton permettant d'afficher et de désafficher le dictionnaire de codage, si le dictionnaire est trop grand il est préférable de le cacher pour que la taille de la fenêtre ne soit pas trop impactée.
+- Il est aussi possible d'ouvrir des fichiers textes pour les lires ou les décrypter.
+- Un bouton choix de langue est situé en haut à gauche de la fenêtre pour changer la langue de la fenêtre parmi Français, Anglais, Espagnol, Allemand ou Chinois.
 
 
 # Explication du code :
