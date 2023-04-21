@@ -327,74 +327,74 @@ option.grid(row=0, column=0, sticky="w")
 # bouton open file
 bouton_save_cle = tk.Button(root, text="Sauvegarder la clé de cryptage",
                             command=lambda: save_text(str(getDictText(text.get()))), state="disabled")
-bouton_save_cle.grid(row=3, column=0, sticky="w")
+bouton_save_cle.grid(row=3, column=0)
 
 bouton_save_crypter = tk.Button(root, text="Sauvegarder le cryptage",
                                 command=lambda: save_text(result_codage.cget("text")), state="disabled")
-bouton_save_crypter.grid(row=7, column=0, sticky="w")
+bouton_save_crypter.grid(row=10, column=0)
 
 bouton_save_decrypter = tk.Button(root, text="Sauvegarder le decryptage",
                                   command=lambda: save_text(decrypter.cget("text")), state="disabled")
-bouton_save_decrypter.grid(row=1, column=5, sticky="w")
+bouton_save_decrypter.grid(row=15, column=0)
 
 
-titre1 = tk.Label(root, text="Entrer un texte pour obtenir un code")
-titre1.grid(row=1, column=0)
+titre1 = tk.Label(root, text="Codage : entrer un texte pour obtenir un code")
+titre1.grid(row=1, column=0,sticky="w")
 
 bouton_open_file_obtenir_code = tk.Button(root, text="Ouvrir un fichier pour avoir un code", command=lambda: [effacer_canvas(canvas), nouv_arbre(open_file(0)),
                                           dessin(canvas, arbre), bouton_afficher.config(state="normal"), bouton_save_cle.config(state="normal"),
                                           bouton_decode.config(state="normal"), bouton_decrypte.config(state="normal")], width=30)
-bouton_open_file_obtenir_code.grid(row=1, column=1)
+bouton_open_file_obtenir_code.grid(row=2, column=0)
 
 boite_texte = tk.Entry(root, textvariable=text)
-boite_texte.grid(row=2, column=0, ipadx=100, ipady=10)
+boite_texte.grid(row=3, column=0, ipadx=100, ipady=10)
 boite_texte.focus()
 
 bouton_texte = tk.Button(root, text="Générer le code", command=lambda: [effacer_canvas(canvas), nouv_arbre(text.get()),
                          dessin(canvas, arbre), bouton_afficher.config(state="normal"), bouton_save_cle.config(state="normal"),
                          bouton_decode.config(state="normal"), bouton_decrypte.config(state="normal")], width=30)
-bouton_texte.grid(row=2, column=1)
+bouton_texte.grid(row=3, column=1)
 
 bouton_afficher = tk.Button(root, text=af_code, command=afficher_dico, width=30, state="disabled")
-bouton_afficher.grid(row=3, column=1)
+bouton_afficher.grid(row=4, column=1)
 
 crypter = tk.Label(root, text="", wraplength=300, anchor="e")
-crypter.grid(row=3, column=0, columnspan=3)
+crypter.grid(row=4, column=0)
 
 titre3 = tk.Label(root, text="Cryptage : entrer un texte à crypter")
-titre3.grid(row=4, column=0, sticky="w")
+titre3.grid(row=5, column=0, sticky="w")
 
 bouton_open_file_a_crypter = tk.Button(root, text="Ouvrir un fichier à crypter", command=lambda: (result_codage.config(text=
                                        code_texte(getDictText(arbre), open_file(1))), bouton_save_crypter.config(state="normal")), width=30)
-bouton_open_file_a_crypter.grid(row=5, column=0)
+bouton_open_file_a_crypter.grid(row=6, column=0)
 
 decode_label = tk.Entry(root, textvariable=text_a_decoder)
-decode_label.grid(row=6, column=0, ipadx=100, ipady=10)
+decode_label.grid(row=7, column=0, ipadx=100, ipady=10)
 
 bouton_decode = tk.Button(root, text="Crypter", command=lambda: (result_codage.config(text=
                           code_texte(getDictText(arbre), getTextDecrypter(text_a_decoder.get()))), bouton_save_crypter.config(state="normal")),
                           width=30, state="disabled")
-bouton_decode.grid(row=6, column=1)
+bouton_decode.grid(row=7, column=1)
 
 result_codage = tk.Label(root, text="")
-result_codage.grid(row=7, column=0)
+result_codage.grid(row=8, column=0)
 
 titre2 = tk.Label(root, text="Décryptage : entrer un texte à décrypter")
-titre2.grid(row=8, column=0, sticky="w")
+titre2.grid(row=11, column=0, sticky="w")
 
 bouton_open_file_a_decrypter = tk.Button(root, text="Ouvrir un fichier à décrypter", command=lambda: (decrypter.config(text=
                                          decrypte_texte(dict, open_file(2))), bouton_save_decrypter.config(state="normal")), width=30)
-bouton_open_file_a_decrypter.grid(row=8, column=0)
+bouton_open_file_a_decrypter.grid(row=12, column=0)
 
 decrypte_label = tk.Entry(root, textvariable=decrypte)
-decrypte_label.grid(row=9, column=0, ipadx=100, ipady=10)
+decrypte_label.grid(row=13, column=0, ipadx=100, ipady=10)
 
 bouton_decrypte = tk.Button(root, text="Décrypter", command=lambda: (decrypter.config(text=
                             decrypte_texte(dict, decrypte.get())), bouton_save_decrypter.config(state="normal")), width=30, state="disabled")
-bouton_decrypte.grid(row=9, column=1)
+bouton_decrypte.grid(row=13, column=1)
 
 decrypter = tk.Label(root, text="")
-decrypter.grid(row=10, column=0)
+decrypter.grid(row=14, column=0)
 
 # Canvas et scrollbars
 frame = tk.Frame(root, height=LARGEUR, width=LONGUEUR)
@@ -406,6 +406,6 @@ xbar.pack(side="bottom", fill="x")
 ybar.pack(side="right", fill="y")
 canvas.config(xscrollcommand=xbar.set, yscrollcommand=ybar.set)
 canvas.pack(expand=True, fill="both")
-frame.grid(row=11, columnspan=2, column=0)
+frame.grid(row=16, columnspan=2, column=0)
 
 root.mainloop()
