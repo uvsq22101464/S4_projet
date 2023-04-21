@@ -33,12 +33,12 @@ En haut à gauche un menu déroulant "choix langues" qui permet de choisir la la
 
 ### Pour obtenir un codage :
 - soit vous entrer du text dans la boite de texte soit vous cliquer sur le button "ouvrir un fichier pour obtenir un ocdage" ensuite si vous voulez voir le codage appuyer sur afficher le code.
-![Capture d'écran de mon application](Screenshot%202023-04-20%20at%2017.49.18.png)
+![Capture d'écran de mon application](Screenshot%202023-04-21%20at%2017.47.25.png)
 
 ### Pour crypter un text : 
 - soit vous entrer du text dans la boite de texte et appuyer sur le bouton "crypter"
 - soit vous cliquer sur le button "ouvrir un fichier à crypter"
-![Capture d'écran de mon application](Screenshot%202023-04-20%20at%2017.49.29.png)
+![Capture d'écran de mon application](Screenshot%202023-04-21%20at%2017.47.32.png)
 
 
 ATTENTION !!
@@ -48,7 +48,7 @@ ATTENTION !!
 ### Pour décrypter un text : 
 - soit vous entrer du text dans la boite de texte et appuyer sur le bouton "décrypter"
 - soit vous cliquer sur le button "ouvrir un fichier à décrypter"
-![Capture d'écran de mon application]
+![Capture d'écran de mon application](Screenshot%202023-04-21%20at%2017.47.47.png)
 ATTENTION !!
 - si ...
 
