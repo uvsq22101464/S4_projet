@@ -85,41 +85,79 @@ Création de deux classes Sommet et Arbre.
 
 ## Interface (interface.py):
 
+
+
  #### La fonction comptage lettre :
+
  
- * Prend une chaîne de caractères en entrée et renvoi une liste de tuple contenant les lettres q
- *  on créer un ensemble  avec le text (set(text)) puis on itère dand cete ensemble chaque element un par un on ajoute chaque element à un dictionnaire ainsi que sa fréquence dans le text.
+
+ * Prends une chaîne de caractères en entrée et renvoi une liste de tuple contenant les lettres q
+
+ *  on crée un ensemble  avec le text (set(text)) puis on itère dand cete ensemble chaque element un par un on ajoute chaque element à un dictionnaire ainsi que sa fréquence dans le text.
+
  
+
  #### La fonction getDictText :
+
  * Donne le dictionnaire du code associé au texte
 
+
+
  #### La fonction code_texte :
+
  * La fonction prend en argument un dictionnaire et un texte saisi par l'utilisateur. La fonction renvoie un texte crypté selon le dictionnaire si la langue des deux textes est la même sinon elle renvoie un message 'ce n'est pas la meme langue'.
 
+
+
  #### La fonction decrypte_texte :
- * La focntion prend en argument un dicctionnaire et un text saisie par l'utilisateur. La focntion renvoie un text decrypter selon le dictionnaire.
+
+ * La fonction prend en argument un dictionnaire et un texte saisie par l'utilisateur. La fonction renvoie un texte décrypté selon le dictionnaire.
+
+
 
  #### La fonction dessin :
- * La fonction dessin() prend en argument un canvas et un ArbreB. La fonction va dans un premier temps calculer la profondeur de l'ArbreB + 1 puis sa largeur, le nombre de noeuds dans l'ArbreB, ainsi qu'un coefficient qui va plus ou moins espacer les branches en fonction de si l'ArbreB est considéré comme grand, l'ArbreB est considéré grand quand la largeur^log2(profondeur) de l'ArbreB est supérieure à 90 (aux alentours d'une largeur de 6 et de profondeur 6). La fonction va ensuite calculer la position X du point suivant en partie grâce au coefficient et va calculer une taille minimale des positions pour pouvoir ajuster la zone de la scrollbar. Pour enfin envoyer ses calculs à la méthode dessinerArbre de la classe ArbreB en paramètre.
+
+ * La fonction dessin() prend en argument un canvas et un ArbreB. La fonction va dans un premier temps calculer la profondeur de l'ArbreB + 1 puis sa largeur, le nombre de nœuds dans l'ArbreB, ainsi qu'un coefficient qui va plus ou moins espacer les branches en fonction de si l'ArbreB est considéré comme grand, l'ArbreB est considéré grand quand la largeur^log2(profondeur) de l'ArbreB est supérieure à 90 (aux alentours d'une largeur de 6 et de profondeur 6). La fonction va ensuite calculer la position X du point suivant en partie grâce au coefficient et va calculer une taille minimale des positions pour pouvoir ajuster la zone de la scrollbar. Pour enfin envoyer ses calculs à la méthode dessinerArbre de la classe ArbreB en paramètre.
+
+
 
  #### La fonction effacer_canvas :
+
  * La fonction prend en argument un canvas. Elle permet d'effacer les éléments dans le canvas.
 
+
+
  #### La fonction language :
+
  * La fonction prend en argument la langue. Elle permet de changer la langue selon la langue choisie par l'utilisateur.
 
+
+
  #### La fonction afficher_dico :
- * La fonction ne prend pas d'argument. Elle permet d'afficher le dictionnaire contenant le codage dans la fenetre graphique.
+
+ * La fonction ne prend pas d'argument. Elle permet d'afficher le dictionnaire contenant le codage dans la fenêtre graphique.
+
+
 
  #### La fonction verfi_lang :
- * La fonction ne prend pas d'argument. Elle permet de connaitre la langue du texte où les statitiques sont faites et la langue du texte à crypter. ELle renvoie Vrai si la langue est la meme sinon elle renvoie Faux.
+
+ * La fonction ne prend pas d'argument. Elle permet de connaître la langue du texte où les statistiques sont faites et la langue du texte à   crypter. ELle renvoie Vrai si la langue est la même sinon elle renvoie Faux.
+
+
 
  #### La fonction open_file :
- * La fonction ne prend pas d'argument. Elle permet d'ouvir un fichier pour obtenir un texte.
+
+ * La fonction ne prend pas d'argument. Elle permet d'ouvrir un fichier pour obtenir un texte.
+
+
 
  #### La fonction  create_file :
+
  * La fonction ne prend pas d'argument. Elle permet de créer un fichier.
 
+
+
  #### La focntion save_text :
- * La fonction prend en argument un texte.
-    Elle permet de sauvegarder le cryptage/decryptage d'un texte.
+
+ * La fonction prend en argument un texte. Elle permet de sauvegarder le cryptage/décryptage d'un texte.
+
