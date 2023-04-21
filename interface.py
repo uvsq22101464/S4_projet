@@ -67,10 +67,13 @@ def decrypte_texte(dico, text: str):
             if val == tmp:
                 result += key
                 tmp = ""
-    if detection_langue(detect_langs(result)) == detection_langue(detect_langs(texte_codant)):
+    try:
+        if detection_langue(detect_langs(result)) == detection_langue(detect_langs(texte_codant)):
+            return result
+        else:
+            return f"{result} | {pas_bonne_cle}"
+    except:
         return result
-    else:
-        return f"{result} | {pas_bonne_cle}"
 
 
 def dessin(canvas: tk.Canvas, arbre: ArbreB):
@@ -245,8 +248,12 @@ def verfi_lang():
     Elle permet de connaitre la langue du texte où les statistiques sont faites et la langue du texte à crypter.
     Elle renvoie Vrai si la langue est la même sinon elle renvoie Faux.
     """
-    langue_codage = detection_langue(detect_langs(texte_codant))
-    langue_text_a_crypter = detection_langue(detect_langs(texte_a_crypter))
+    try:
+        langue_codage = detection_langue(detect_langs(texte_codant))
+        langue_text_a_crypter = detection_langue(detect_langs(texte_a_crypter))
+    except:
+        langue_codage = "fr"
+        langue_text_a_crypter = "fr"
     if langue_codage == langue_text_a_crypter:
         return True
     else:
@@ -292,7 +299,10 @@ def nouv_arbre(text):
     arbre = ArbreB.create_tree(Sommet.make_list(comptage_lettre(text)))
     texte_codant = text
     dict = ArbreB.codage(arbre)
-    language(detection_langue(detect_langs(texte_codant)))
+    try:
+        language(detection_langue(detect_langs(texte_codant)))
+    except:
+        language("fr")
     return arbre, texte_codant, dict
 
 
