@@ -87,10 +87,6 @@ class ArbreB(object):
         return liste
 
 
-    def __add__(self, sommet1, sommet2):
-        return self.fusion_sommet(sommet1, sommet2)
-
-
     def create_tree(liste_sommet):
         """
         Prends une liste de Sommet en entrée et retourne un objet ArbreB dont la racine est le sommet de plus haute valeur.
