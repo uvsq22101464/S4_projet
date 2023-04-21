@@ -52,17 +52,26 @@ ATTENTION !!
 - languedetect
 
 
-## Module arbre (ethan.py):
+## Module arbre (module_arbre.py):
 
 Création de deux classes Sommet et Arbre.
 
-ethan fait cette partie :)
+#### class ArbreB(Object) : 
+ * Les objets de la classe ArbreB sont représentés par une racine qui est un Sommet.
+ * La classe possède plusieurs méthodes permettant notamment de connaître la profondeur de l'ArbreB, sa largeur totale et celle à gauche et à droite.
+ * Le calcul de la profondeur se fait par un appel récursif sur les noeuds de l'ArbreB tandis que la largeur se calcule à partir du dictionnaire de codage qui retient la longueur du chemin avec que des 0 (chemin de gauche) et le chemin avec des 1 (chemin de droite).
+ * La classe permet aussi de rechercher un Sommet dans l'ArbreB à partir du nom du Sommet ou de son identifiant.
+ * Il est possible de créer un ArbreB avec la fonction create_tree() qui prend un argument une liste de sommet et renvoi l'ArbreB de Huffman associé, pour ce faire, la fonction prends les deux plus petites valeurs des Sommets, les fusionnent et les remet dans la liste des Sommets.
+ * La classe permet aussi d'obtenir le codage d'Huffman de l'ArbreB en le parcourant de manière récursive et en associant un 0 au code quand il s'agit d'un sous arbre-gauche et un 1 dans le cas d'un sous arbre-droit, la méthode renvoie un dictionnaire contenant le nom en clé et le code en valeur des feuilles de l'ArbreB ou de tout les Sommets.
+ * Il est aussi possible d'insérer et de supprimer un Sommet dans l'ArbreB, de connaître le nombre de Sommets dans l'arbre.
+ * La classe possède les méthodes getListeSommet et getListeFeuille qui donnent une liste avec tous les Sommets de l'ArbreB ou toutes les feuilles de l'ArbreB.
+ * Et enfin il est possible de dessiner l'ArbreB avec la méthode dessinerArbre() qui va prendre en argument un canvas, la largeur du canvas, une position x et y de départ facultatifs, la largeur de l'arbre, sa profondeur et la position X du point suivant. À chaque appel de la méthode, on va regarder si le Sommet est une feuille pour changer sa couleur et ne pas dessiner de flèches vers ses fils et tant que le Sommet a des fils, on va rappeler la méthode.
+ 
+#### class Sommet(ArbreB) :
+ * Chaque objet de la classe Sommet est caractérisé par une valeur entière, un nom ainsi qu'un fils droit et un fils gauche qui sont des Sommets, si le Sommet n'a pas de fils gauche ou droit alors la valeur est None.
+ * La classe Sommet hérite de la classe ArbreB pour pouvoir profiter de ses méthodes.
+ * La classe possède la fonction make_list qui prends en entrée une liste de tuple (lettre, occurrence) et renvoie une liste contenant les Sommets de ces tuples.
 
-#### class sommet :
- * ...
-
-#### class arbre : 
- * ...
 
 ## Interface (interface.py):
 
