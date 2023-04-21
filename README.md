@@ -1,11 +1,11 @@
-# Auteurs du Projet:
+# Auteurs du Projet :
 
 - Sam Barbosa
 - Ethan Mache
 
 # Présentation Projet :
 
-Le but du projet est de coder un texte selon le codage de Hauffman. Puis de crypter un text selon le codage obtenu et ensuite de de pourvoir le décrypter.
+Le but du projet est de coder un texte selon le codage de Hauffman. Puis de crypter un texte selon le codage obtenu et ensuite de pouvoir le décrypter.
 
 
 ![Capture d'écran de mon application](Screenshot%202023-04-21%20at%2017.20.56.png)
@@ -14,40 +14,40 @@ Le but du projet est de coder un texte selon le codage de Hauffman. Puis de cryp
 
 ### Utilisation de l'application directement :
 
-* si vous êtes sur window double cliquer sur interface.exe
-* si vous êtes sur mac os douvble cliquer sur interface.dmg
+* Si vous êtes sur window double cliquer sur interface.exe
+* Si vous êtes sur mac os double cliquer sur interface.dmg
 
 ### Autre solution en utilisant le code source directement
 
-* au préalable il faut installer python ainsi que les librairies tkinter, languedetect et math (pip install...)
-* dans le terminal tapez "python interface.py"
+* Au préalable il faut installer python ainsi que les librairies tkinter, languedetect et math (pip install...)
+* Dans le terminal tapez "python interface.py"
 
 # Guide d'utilisation de l'application :
 
-En haut à gauche un menu déroulant "choix langues" qui permet de choisir la langue. Saississez la langue de votre choix.
-(francais, anglais, allemand, espagnol, chinnois)
+En haut à gauche un menu déroulant "choix langues" qui permet de choisir la langue. Saisissez la langue de votre choix.
+(Français, anglais, allemand, espagnol, chinois)
 
 ![Capture d'écran de mon application](Screenshot%202023-04-20%20at%2017.26.41.png)
 
 
 
 ### Pour obtenir un codage :
-- soit vous entrer du text dans la boite de texte soit vous cliquer sur le button "ouvrir un fichier pour obtenir un ocdage" ensuite si vous voulez voir le codage appuyer sur afficher le code.
+- Soit vous entrer du texte dans la boîte de texte soit vous cliquer sur le bouton "ouvrir un fichier pour obtenir un ocdage" ensuite si vous voulez voir le codage appuyer sur afficher le code.
 ![Capture d'écran de mon application](Screenshot%202023-04-21%20at%2017.47.25.png)
 
-### Pour crypter un text : 
-- soit vous entrer du text dans la boite de texte et appuyer sur le bouton "crypter"
-- soit vous cliquer sur le button "ouvrir un fichier à crypter"
+### Pour crypter un texte : 
+- Soit vous entrer du texte dans la boîte de texte et appuyer sur le bouton "crypter"
+- Soit vous cliquer sur le bouton "ouvrir un fichier à crypter"
 ![Capture d'écran de mon application](Screenshot%202023-04-21%20at%2017.47.32.png)
 
 
 ATTENTION !!
-- si la langue est différente du texte où le codage a été fait, il y aura un message "ce n'est pas la meme langue"
-- si il y a un caractère dans le text qui n'a pas de code, il y aura un message d'erreur "le caractère .... n'est pas dans le text"
+- Si la langue est différente du texte où le codage a été fait, il y aura un message "ce n'est pas la meme langue"
+- S’il y a un caractère dans le texte qui n'a pas de code, il y aura un message d'erreur "le caractère .... n'est pas dans le texte"
 
-### Pour décrypter un text : 
-- soit vous entrer du text dans la boite de texte et appuyer sur le bouton "décrypter"
-- soit vous cliquer sur le button "ouvrir un fichier à décrypter"
+### Pour décrypter un texte : 
+- Soit vous entrer du texte dans la boîte de texte et appuyer sur le bouton "décrypter"
+- Soit vous cliquer sur le bouton "ouvrir un fichier à décrypter"
 ![Capture d'écran de mon application](Screenshot%202023-04-21%20at%2017.47.47.png)
 ATTENTION !!
 - si ...
@@ -55,7 +55,7 @@ ATTENTION !!
 
 # Explication du code :
 
-## Librairie utilisés:
+## Librairies utilisées:
 
 - tkinter
 - maths
@@ -80,14 +80,14 @@ Création de deux classes Sommet et Arbre.
 #### class Sommet(ArbreB) :
  * Chaque objet de la classe Sommet est caractérisé par une valeur entière, un nom ainsi qu'un fils droit et un fils gauche qui sont des Sommets, si le Sommet n'a pas de fils gauche ou droit alors la valeur est None.
  * La classe Sommet hérite de la classe ArbreB pour pouvoir profiter de ses méthodes.
- * La classe possède la fonction make_list qui prends en entrée une liste de tuple (lettre, occurrence) et renvoie une liste contenant les Sommets de ces tuples.
+ * La classe possède la fonction make_list qui prend en entrée une liste de tuple (lettre, occurrence) et renvoie une liste contenant les Sommets de ces tuples.
 
 
 ## Interface (interface.py):
 
  #### La fonction comptage lettre :
  
- * prend une chaîne de caractère en entrée et renvoi une liste de tuple contenant les lettres qui apparaissent dans le  text et leur nombre d'occurence.
+ * Prend une chaîne de caractères en entrée et renvoi une liste de tuple contenant les lettres q
  *  on créer un ensemble  avec le text (set(text)) puis on itère dand cete ensemble chaque element un par un on ajoute chaque element à un dictionnaire ainsi que sa fréquence dans le text.
  
  #### La fonction getDictText :
