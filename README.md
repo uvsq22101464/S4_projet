@@ -3,7 +3,6 @@
 - Sam Barbosa
 - Ethan Mache
 
-
 # Présentation Projet :
 
 Le but du projet est de coder un texte selon le codage de Hauffman. Puis de crypter un text selon le codage obtenu et ensuite de de pourvoir le décrypter.
@@ -11,6 +10,17 @@ Le but du projet est de coder un texte selon le codage de Hauffman. Puis de cryp
 
 ![Capture d'écran de mon application](Screenshot%202023-04-20%20at%2016.39.08.png)
 
+# Mécanisme d'installation :
+
+### Utilisation de l'application directement :
+
+* si vous êtes sur window double cliquer sur interface.exe
+* si vous êtes sur mac os douvble cliquer sur interface.dmg
+
+### Autre solution en utilisant le code source directement
+
+* au préalable il faut installer python ainsi que les librairies tkinter, languedetect et math
+* dans le terminal tapez "python interface.py"
 
 # Guide d'utilisation de l'application :
 
