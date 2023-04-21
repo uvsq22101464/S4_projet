@@ -100,7 +100,7 @@ Création de deux classes Sommet et Arbre.
  * La focntion prend en argument un dicctionnaire et un text saisie par l'utilisateur. La focntion renvoie un text decrypter selon le dictionnaire.
 
  #### La fonction dessin :
- * ethan :)
+ * La fonction dessin() prend en argument un canvas et un ArbreB. La fonction va dans un premier temps calculer la profondeur de l'ArbreB + 1 puis sa largeur, le nombre de noeuds dans l'ArbreB, ainsi qu'un coefficient qui va plus ou moins espacer les branches en fonction de si l'ArbreB est considéré comme grand, l'ArbreB est considéré grand quand la largeur^log2(profondeur) de l'ArbreB est supérieure à 90 (aux alentours d'une largeur de 6 et de profondeur 6). La fonction va ensuite calculer la position X du point suivant en partie grâce au coefficient et va calculer une taille minimale des positions pour pouvoir ajuster la zone de la scrollbar. Pour enfin envoyer ses calculs à la méthode dessinerArbre de la classe ArbreB en paramètre.
 
  #### La fonction effacer_canvas :
  * La fonction prend en argument un canvas. Elle permet d'effacer les éléments dans le canvas.
