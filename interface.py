@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import tkinter as tk
 from tkinter import filedialog
 from langdetect import detect_langs
@@ -6,7 +7,7 @@ import math
 
 root = tk.Tk()
 root.title("Projet crypto")
-LONGUEUR, LARGEUR = 1200, 400
+LONGUEUR, LARGEUR = 1200, 350
 
 # fonctions :
 def comptage_lettre(text):
@@ -102,9 +103,9 @@ def language(langue):
     """
     global erreur_carac, desaf_code, af_code, pas_meme_langue, pas_bonne_cle
     if langue == "Francais" or langue == "fr":
-        titre1.config(text="Entrer un texte pour obtenir un code")
-        titre2.config(text ="Décryptage : entrer un texte à décrypter")
-        titre3.config(text ="Cryptage : entrer un texte à crypter")
+        titre1.config(text="Codage : entrer un texte pour obtenir un code")
+        titre2.config(text="Décryptage : entrer un texte à décrypter")
+        titre3.config(text="Cryptage : entrer un texte à crypter")
         bouton_texte.config(text="Générer le code")
         bouton_decrypte.config(text="Décrypter")
         bouton_decode.config(text="Crypter")
@@ -114,7 +115,7 @@ def language(langue):
         bouton_save_decrypter.config(text="Sauvegarder le décryptage")
         bouton_save_cle.config(text="Sauvegarder la clé de cryptage")
         bouton_open_file_obtenir_code.config(text="Ouvrir un fichier pour avoir un code")
-        option.config(text="Choix Langue")
+        option.config(text="Choix Langues")
         erreur_carac = "n'est pas dans le texte servant à coder"
         bouton_afficher.config(text="Afficher le code" if bouton_afficher["text"] == af_code else "Désafficher le code")
         desaf_code = "Désafficher le code"
@@ -124,8 +125,8 @@ def language(langue):
 
     elif langue == "English" or langue == "en":
         titre1.config(text="Enter text to get coding")
-        titre2.config(text ="Decryption : ")
-        titre3.config(text ="Encryption : ")
+        titre2.config(text="Decryption : ")
+        titre3.config(text="Encryption : ")
         bouton_texte.config(text="Generate the code")
         bouton_decrypte.config(text="Unencrypt")
         bouton_decode.config(text="Encrypt")
@@ -145,8 +146,8 @@ def language(langue):
 
     elif langue == "Español" or langue == "es":
         titre1.config(text="Ingrese el texto para obtener la codificación")
-        titre2.config(text ="Cifrado : ")
-        titre3.config(text ="Descifrado : ")
+        titre2.config(text="Cifrado : ")
+        titre3.config(text="Descifrado : ")
         bouton_texte.config(text="Generar el código")
         bouton_decrypte.config(text="Descifrar")
         bouton_decode.config(text="Encriptar")
@@ -166,8 +167,8 @@ def language(langue):
 
     elif langue == "Deutsch" or langue == "de":
         titre1.config(text="Öffnen Sie die Datei, um die Codierung zu erhalten")
-        titre2.config(text ="Entschlüsselung : ")
-        titre3.config(text ="Verschlüsselung : ")
+        titre2.config(text="Entschlüsselung : ")
+        titre3.config(text="Verschlüsselung : ")
         bouton_texte.config(text="Generieren Sie den Code")
         bouton_decrypte.config(text="Entschlüsseln")
         bouton_decode.config(text="Verschlüsseln")
@@ -187,8 +188,8 @@ def language(langue):
 
     elif langue == "中国人" or langue == "zh-cn":
         titre1.config(text="输入文字获取编码")
-        titre2.config(text ="解密 : ")
-        titre3.config(text ="加密 : ")
+        titre2.config(text="解密 : ")
+        titre3.config(text="加密 : ")
         bouton_texte.config(text="生成代码")
         bouton_decrypte.config(text="解密")
         bouton_decode.config(text="加密")
@@ -226,11 +227,11 @@ def afficher_dico():
     La fonction ne prend pas d'argument.
     Elle permet d'afficher le dictionnaire contenant le codage dans la fenêtre graphique.
     """
-    if crypter["text"] == "":
-        crypter.config(text=str(dict))
+    if dictionnaire["text"] == "":
+        dictionnaire.config(text=str(dict))
         bouton_afficher.config(text=desaf_code)
     else:
-        crypter.config(text="")
+        dictionnaire.config(text="")
         bouton_afficher.config(text=af_code)
 
 
@@ -358,8 +359,8 @@ bouton_texte.grid(row=3, column=1)
 bouton_afficher = tk.Button(root, text=af_code, command=afficher_dico, width=30, state="disabled")
 bouton_afficher.grid(row=4, column=1)
 
-crypter = tk.Label(root, text="", wraplength=300, anchor="e")
-crypter.grid(row=4, column=0)
+dictionnaire = tk.Label(root, text="", wraplength=1000, anchor="e")
+dictionnaire.grid(row=4, column=0)
 
 titre3 = tk.Label(root, text="Cryptage : entrer un texte à crypter")
 titre3.grid(row=5, column=0, sticky="w")
@@ -376,7 +377,7 @@ bouton_decode = tk.Button(root, text="Crypter", command=lambda: (result_codage.c
                           width=30, state="disabled")
 bouton_decode.grid(row=7, column=1)
 
-result_codage = tk.Label(root, text="")
+result_codage = tk.Label(root, text="", wraplength=1000)
 result_codage.grid(row=8, column=0)
 
 titre2 = tk.Label(root, text="Décryptage : entrer un texte à décrypter")
@@ -393,7 +394,7 @@ bouton_decrypte = tk.Button(root, text="Décrypter", command=lambda: (decrypter.
                             decrypte_texte(dict, decrypte.get())), bouton_save_decrypter.config(state="normal")), width=30, state="disabled")
 bouton_decrypte.grid(row=13, column=1)
 
-decrypter = tk.Label(root, text="")
+decrypter = tk.Label(root, text="", wraplength=1000)
 decrypter.grid(row=14, column=0)
 
 # Canvas et scrollbars
